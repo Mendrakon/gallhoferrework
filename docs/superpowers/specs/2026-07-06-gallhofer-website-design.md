@@ -56,7 +56,7 @@ next.config.js       # 301-Redirects aller alten .php-URLs
 
 Ein zentraler `<SiteHeader>` (Client Component) leitet die „Welt" aus dem Pfad ab (`usePathname`):
 
-- **Neutral** (`/`): Logo + reduzierte Navigation wie im Original-Splash.
+- **Splash** (`/`): Logo + Hauptmenü (*Willkommen · Hausverwaltung & Industrie · Heizzentralen · Fernüberwachung · Gebrechendienst · Wartung · Galerie*) — so auf der Live-Startseite beobachtet.
 - **Privat** (`/privatkunden/*`, `/heizungsrechner`): Menü *Reparaturen · Kessel & Thermentausch · Smart Home · Umwelt- & Energiemanagement · Renovierung & Neubau*.
 - **B2B** (alle übrigen Leistungsseiten): Menü *Willkommen · Hausverwaltung & Industrie · Heizzentralen · Fernüberwachung · Gebrechendienst · Wartung · Galerie*.
 
@@ -88,6 +88,7 @@ CSS-Variablen in `globals.css`, gemappt ins Tailwind-Theme. **Aus der Live-Seite
 :root {
   --brand:      /* ⚠️ beim Bauen aus Logo + Live-Theme-CSS feststecken */;
   --brand-dark: /* abgeleitet von --brand */;
+  --accent:     /* nur falls im Live-CSS eine Zweitfarbe existiert, sonst entfällt der Token */;
   --text:       #32373c;
   --muted:      /* aus Live-CSS ableiten, sonst neutraler Grauwert */;
   --bg:         #ffffff;
