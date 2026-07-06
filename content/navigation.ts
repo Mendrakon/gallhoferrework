@@ -5,7 +5,10 @@ export interface NavItem {
   href: string;
 }
 
-// Reihenfolge und Wording exakt wie auf der Live-Seite (Stand 2026-07-06)
+// Reihenfolge und Wording gemäß Live-Seite (Stand 2026-07-06) mit einer dokumentierten Ausnahme:
+// Die Alt-Seite ist bei einem Label in sich inkonsistent (Nav: "Umwelt – & Energiemanagement",
+// Teaser: "UMWELT & ENERGIEMANAGEMENT"). Wir folgen dem Auftraggeber-Dokument (Gallhofer-Rework.md):
+// "Umwelt- & Energiemanagement". Freigabe durch den Betrieb: siehe TODO-BETRIEB.md.
 export const mainNav: NavItem[] = [
   { label: "Willkommen", href: "/" },
   { label: "Hausverwaltung & Industrie", href: "/hausverwaltung-industrie" },

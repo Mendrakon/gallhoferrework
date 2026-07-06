@@ -25,10 +25,15 @@ describe("Menüs", () => {
     ]);
   });
 
-  it("Privat-Menü führt Übersicht + 5 Leistungen", () => {
-    expect(privatNav[0]).toEqual({ label: "Privatkunden", href: "/privatkunden" });
-    expect(privatNav.map((i) => i.label)).toContain("Smart Home");
-    expect(privatNav).toHaveLength(6);
+  it("Privat-Menü führt Übersicht + 5 Leistungen exakt", () => {
+    expect(privatNav).toEqual([
+      { label: "Privatkunden", href: "/privatkunden" },
+      { label: "Reparaturen", href: "/privatkunden/reparaturen" },
+      { label: "Kessel & Thermentausch", href: "/privatkunden/kessel-thermentausch" },
+      { label: "Smart Home", href: "/privatkunden/smart-home" },
+      { label: "Umwelt- & Energiemanagement", href: "/privatkunden/umwelt-energiemanagement" },
+      { label: "Renovierung & Neubau", href: "/privatkunden/renovierung-neubau" },
+    ]);
   });
 
   it("navForWorld liefert Splash und B2B das Hauptmenü, Privat das Privat-Menü", () => {
