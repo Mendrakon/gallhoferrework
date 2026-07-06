@@ -48,17 +48,83 @@ export const privatUebersicht: ServicePage = {
   contentPending: true,
 };
 
-// Die 5 Privatkunden-Detailseiten (reparaturen, kessel-thermentausch, smart-home,
-// umwelt-energiemanagement, renovierung-neubau) waren nicht Teil der Step-1-Abfrageliste
-// (nur privatkunden, hausverwaltung-industrie, heizzentralen, fernueberwachung, wartung
-// wurden geladen) — daher hier keine Extraktion versucht, keine URLs erraten. Bleiben
-// pending, bis eine eigene Abfrage der Detailseiten erfolgt.
+// Nachtrag (siehe .superpowers/sdd/task-4-report.md, Abschnitt "Nachtrag: Privat-
+// Detailseiten-Extraktion"): Die 5 Privatkunden-Detailseiten waren nicht Teil von Task 4
+// Step 1. Live-Dateinamen laut Task-4-Concerns (weichen teils vom Routen-Slug ab):
+// privatkunden-reparaturen.php, privatkunden-kessel-thermentausch.php,
+// privatkunden-smart-home.php, privatkunden-umwelt-energiemanagement.php,
+// renovierung-und-neubau.php. Alle 5 Fetches HTTP 200, echte Einzelseiten (eigene <h1>,
+// sitetypisches <title>), durchgehend sauberer themenbezogener <p>-Fließtext → alle 5
+// vollständig übernommen, verbatim, absatzweise.
+//
+// Sicherheitsfund: reparaturen, umwelt-energiemanagement und renovierung-neubau enthalten
+// je einen separaten unsichtbaren Spam-<div> (winzig, absolut positioniert, overflow:scroll)
+// mit Viagra-/Steroid-Links direkt nach dem echten Content — derselbe Hack wie bei
+// privatkunden.php in Task 4, nur anderes Verbergungsmuster (Mini-Div statt opacity:.0).
+// Diese <div>s liegen außerhalb jedes <p>-Tags (kenntlich an einer verwaisten zusätzlichen
+// </p> direkt davor) und wurden von der <p>-Extraktion nachweislich nicht erfasst
+// (Tag-Audit: 0 Spam-Marker in den übernommenen <p>-Spans).
 export const privatLeistungen: ServicePage[] = [
-  { slug: "reparaturen", title: "Reparaturen", paragraphs: [], contentPending: true },
-  { slug: "kessel-thermentausch", title: "Kessel & Thermentausch", paragraphs: [], contentPending: true },
-  { slug: "smart-home", title: "Smart Home", paragraphs: [], contentPending: true },
-  { slug: "umwelt-energiemanagement", title: "Umwelt- & Energiemanagement", paragraphs: [], contentPending: true },
-  { slug: "renovierung-neubau", title: "Renovierung & Neubau", paragraphs: [], contentPending: true },
+  {
+    slug: "reparaturen",
+    title: "Reparaturen",
+    paragraphs: [
+      "Abflussverstopfung: Vom Badezimmer Abfluss bis hin zu Ihrem WC- oder Terrassen Abfluss können wir mit unserem kompakten Spezialwerkzeug Verstopfungen beheben.",
+      "Leitungsgebrechen: Bei Leitungsgebrechen in der Wasser-, Heizungs- oder Abflussleitung sind wir der richtige Ansprechpartner für Sie. Es wird jeder Schaden mit sämtlichen Folgeschäden für die Versicherung mit Fotos dokumentiert (jeweils vor und nach der Reparatur). Die Behebungen sämtlicher Folge- und Nebenschäden können wir selbstverständlich auch für Sie mit unseren Partnerfirmen übernehmen. Wenn möglich, kann die Schadenabwicklung auch direkt über Ihre Versicherung erfolgen.",
+      "Leckortung: Im Rahmen der Gebrechenssuche führen wir wenn notwendig auch jede Art von Leckortung mit Partnerfirmen durch.",
+      "Gasleitung: Leckagen in der Gasleitung können wir für Sie fachgerecht und wahlweise ohne Stemmarbeiten mittels flüssigem Dichtmittel wieder Instand setzen.",
+      "Störungen in Heizungsanlagen: Sie haben ein schon lang andauerndes oder erst kürzlich aufgetretenes Problem in Ihrer Heizungsanlage? Unsere langjährige Erfahrung im Heizungsbau auch in alten Gebäuden und daher auch alten Heizsystemen kommt Ihnen hier zu Gute. Die Heizungshydraulik ist oft und vor allem in alten Gebäuden sehr komplex. Wir finden heraus wo der Schuh drückt und bieten Ihnen kompetente Lösungen an.",
+    ],
+    contentPending: false,
+  },
+  {
+    slug: "kessel-thermentausch",
+    title: "Kessel & Thermentausch",
+    paragraphs: [
+      "Sie haben einen veralteten Heizkessel oder eine defekte Therme? Wir beraten Sie gerne und führen kompetent den Tausch Ihres Wärmeerzeugers durch. Der Umbau erfolgt wenn möglich immer so, dass Ihre Warmwasserversorgung oder die Heizung so kurz wie möglich unterbrochen werden.",
+      "Unsere langjährige Erfahrung als Heizungsbauer kommt Ihnen hier zu Gute. Wir können für Sie die nötigen Umbauarbeiten hydraulisch sowie auch regelungstechnisch planen und umsetzen. Mit unseren Partnern, den Herstellern von Wärmeerzeugern und in der Regelungstechnik, decken wir ein sehr großes Spektrum ab und können Ihnen individuelle und genau auf Sie abgestimmte Lösungen anbieten. Dokumentationen und Pläne erstellen wir auf Wunsch mittels CAD – Software fachgerecht und individuell für Ihre Anlage.",
+    ],
+    contentPending: false,
+  },
+  {
+    slug: "smart-home",
+    title: "Smart Home",
+    paragraphs: [
+      // Abs. 2: "Mehr unter :" (Leerzeichen vor dem Doppelpunkt) und Abs. 4: literales "> "
+      // vor dem Querverweis sind Original-Eigenheiten (vgl. ">"-Bullet-Muster in
+      // heizzentralen, Task 4) — verbatim erhalten, keine Umformulierung.
+      "Mit uns kann auch Ihre Heizung Smart werden. Folgende Bereiche können wir Ihnen anbieten:",
+      "Egal welchen Wärmeerzeuger Sie installiert haben oder installieren wollen. Im Bereich der Wohnungsregelung können wir Ihnen mit dem Produkt der Marke Honeywell Evo Home ein starkes und stabiles Produkt anbieten welches Ihre Heizkörper und/oder auch Ihre Therme oder Fernwärme individuell regelt. Eine Fernsteuerung lässt sich problemlos ausführen. Wir beraten Sie gerne! Mehr unter : https://getconnected.honeywell.com/de/thermostate/evohome",
+      "Mit den Produkten bevorzugt der Firmen „Viessmann“ und „Technische Alternative“ wird auch die Heizung Ihres Einfamilienhauses Smart und bietet mehr Komfort bei gleichzeitiger Energieeinsparung durch exaktes Regeln.",
+      "Die Software kann auch in Kombination mit Alternativ-Energien wie Solaranlagen, Wärmepumpen usw. eingesetzt werden. Hier kann eine individuelle Regelung Ihren Komfort und auch Ihre Heizkosten optimieren. Egal wie Ihre Anlage ausgeführt ist, wir können die Software für Sie individuell programmieren. Beachten Sie auch unsere Leistungen im Bereich > Umwelt und Energie",
+    ],
+    contentPending: false,
+  },
+  {
+    slug: "umwelt-energiemanagement",
+    title: "Umwelt- & Energiemanagement",
+    paragraphs: [
+      "Unsere Rohstoffe sind allesamt wertvoll und manche auch sogar begrenzt. Auch Wasser wird eines Tages sehr wertvoll sein. Daher bieten wir Ihnen auch unser Know-How im Bereich der Regenwassernutzung an.",
+      "Die Sonne ist eine für uns unerschöpfliche Energiequelle. Warum diese dann nicht nutzen?",
+      "Mit Sonnenkollektoren der Marke Viessmann mit Therm – Protect optimieren wir Ihre Heizung unabhängig davon ob nur Warmwasser, Ihre Heizung oder auch das Schwimmbad unterstützt werden soll. Neben den Standard-Solarregelungen können wir eine von uns individuell programmierte Regelung anbieten, da wir eine „echte Speicher Nachheizunterdrückung“ umsetzen und somit auch im Gegensatz zu Standard-Regelungen die Sonnenenergie optimal nutzen. Gerne beraten wir Sie diesbezüglich.",
+      // "!!Wartung!!" ist Original-Betonung (Ausrufezeichen statt Überschrift), verbatim erhalten.
+      "!!Wartung!! Auch eine Solaranlage gehört fachgerecht gewartet. Wir empfehlen eine Wartung je nach Anlagengröße von jährlich bis hin zu 3-Jahres Abständen. Gerne können wir Ihnen auch ein Wartungsangebot erstellen.",
+      "Im Neubau wird derzeit zu recht die Wärmepumpe forciert. Hier können wir Ihr Projekt mit den Herstellern Viessmann und Ochsner oder einem Ihrer Favoriten fachgerecht und effizient umsetzen. Selbstverständlich auch mit individuell programmierbarer Regelung der Technischen Alternative.",
+      "Unter den erneuerbaren Energiequellen zählen die Brennstoffe Pellets, Hackgut und unser gutes altes Scheitholz zu den wichtigsten Energielieferanten. Mit unserem starken österreichischen Partner Hargassner oder die Firma Viessmann planen wir gerne Ihre Holzheizung und setzen Ihr Projekt um.",
+    ],
+    contentPending: false,
+  },
+  {
+    // Live-Datei renovierung-und-neubau.php — Dateiname weicht vom Routen-Slug ab.
+    slug: "renovierung-neubau",
+    title: "Renovierung & Neubau",
+    paragraphs: [
+      "Folgende Projekte können wir für Sie umsetzen:",
+      "Projektierung und Installation von Heizungs-, Klima-, Lüftungs- und Sanitärinstallationen für Wohnungssanierung, Dachgeschoßausbau oder Einfamilienhäuser. Wir sind gerne Ihr Partner für Ihr Projekt, helfen Ihnen bei der Planung und setzen Ihr Projekt fachgerecht um.",
+      "Natürlich erstellen wir auch gerne alle notwendigen Unterlagen für Einreichungen und Meldungen bei der zuständigen Gemeinde.",
+    ],
+    contentPending: false,
+  },
 ];
 
 export const b2bSeiten: ServicePage[] = [
