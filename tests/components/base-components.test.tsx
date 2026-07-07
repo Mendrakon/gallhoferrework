@@ -16,7 +16,8 @@ describe("TodoNote", () => {
 
 describe("Tile", () => {
   it("verlinkt Bild + Titel auf den Bereich", () => {
-    render(<Tile href="/privatkunden" title="PRIVATKUNDEN" image="/privatkunden.jpg" alt="Privatkunden" />);
+    const stubImage = { src: "/privatkunden.jpg", width: 800, height: 533 };
+    render(<Tile href="/privatkunden" title="PRIVATKUNDEN" image={stubImage} alt="Privatkunden" />);
     expect(screen.getByRole("link", { name: /PRIVATKUNDEN/ })).toHaveAttribute("href", "/privatkunden");
     expect(screen.getByAltText("Privatkunden")).toBeInTheDocument();
   });

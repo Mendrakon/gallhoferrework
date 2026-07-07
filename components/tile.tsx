@@ -9,7 +9,7 @@ export function Tile({
 }: {
   href: string;
   title: string;
-  image: StaticImageData | string;
+  image: StaticImageData;
   alt: string;
 }) {
   return (
