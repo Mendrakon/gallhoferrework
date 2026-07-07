@@ -1,5 +1,5 @@
 import { allRoutes } from "@/content/pages";
-import { phpRedirects } from "@/next.config";
+import nextConfig, { phpRedirects } from "@/next.config";
 
 describe("301-Redirects", () => {
   it("deckt alle bekannten alten .php-URLs ab", () => {
@@ -23,6 +23,15 @@ describe("301-Redirects", () => {
     for (const r of phpRedirects) {
       expect(r.source.endsWith(".php")).toBe(true);
       expect(allRoutes).toContain(r.destination);
+    }
+  });
+
+  it("redirects() emittiert für jede Regel statusCode 301", async () => {
+    const rules = await nextConfig.redirects!();
+    expect(rules).toHaveLength(phpRedirects.length);
+    for (const r of rules) {
+      expect(r.statusCode).toBe(301);
+      expect(r.permanent).toBeUndefined();
     }
   });
 });
