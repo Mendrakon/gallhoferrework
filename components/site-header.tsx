@@ -15,7 +15,7 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-line bg-bg">
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 sm:justify-center">
         <Link href="/" aria-label="Gallhofer Haustechnik – zur Startseite" onClick={() => setOpen(false)}>
           <Image src={logoDesktop} alt="Gallhofer Haustechnik" priority className="hidden h-12 w-auto sm:block" />
           <Image src={logoMobile} alt="Gallhofer Haustechnik" priority className="h-10 w-auto sm:hidden" />
@@ -58,7 +58,7 @@ export function SiteHeader() {
         aria-label="Hauptnavigation"
         className={`${open ? "block" : "hidden"} border-t border-line sm:block`}
       >
-        <ul className="mx-auto flex w-full max-w-5xl flex-col px-4 py-2 sm:flex-row sm:gap-6">
+        <ul className="mx-auto flex w-full max-w-5xl flex-col px-4 py-2 sm:flex-row sm:justify-center sm:gap-6">
           {items.map((item) => {
             const active = pathname === item.href;
             return (
