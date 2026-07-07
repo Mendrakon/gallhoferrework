@@ -1,6 +1,7 @@
 import type { StaticImageData } from "next/image";
 import { notFound } from "next/navigation";
 import { ServicePageBody } from "@/components/service-page-body";
+import { galleryBySlug } from "@/content/galleries";
 import { privatLeistungen, privatLeistungBySlug } from "@/content/services";
 import { buildMetadata } from "@/lib/meta";
 import heroReparaturen from "@/public/leistungen/hero-reparaturen.jpg";
@@ -37,6 +38,7 @@ export default async function PrivatLeistungPage({ params }: { params: Promise<{
       page={page}
       hero={heroBySlug[slug]}
       heroAlt={`${page.title} – Gallhofer Haustechnik`}
+      gallery={galleryBySlug[slug]}
     />
   );
 }

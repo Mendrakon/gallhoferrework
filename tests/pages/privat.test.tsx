@@ -34,12 +34,14 @@ describe("Heizungsrechner", () => {
 });
 
 describe("Leistungs-Detailseite", () => {
-  it("rendert bekannte Slugs mit Titel als h1 und Hero-Bild", async () => {
+  it("rendert bekannte Slugs mit Titel als h1, Hero-Bild und Galerie", async () => {
     const { container } = render(
       await PrivatLeistungPage({ params: Promise.resolve({ slug: "smart-home" }) })
     );
     expect(screen.getByRole("heading", { level: 1, name: "Smart Home" })).toBeInTheDocument();
     expect(container.querySelectorAll("img").length).toBeGreaterThanOrEqual(1);
+    // Smart-Home-Detailseite zeigt die 5 Original-Galeriebilder unter dem Text.
+    expect(container.querySelectorAll("ul li img")).toHaveLength(5);
   });
 
   it("wirft notFound für unbekannte Slugs", async () => {

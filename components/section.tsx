@@ -22,7 +22,9 @@ export function Section({
           className="mb-6 h-auto w-full rounded"
         />
       ) : null}
-      {title ? <h1 className="mb-6 text-3xl font-bold tracking-tight text-text">{title}</h1> : null}
+      {title ? (
+        <h1 className="mb-6 text-3xl font-bold uppercase tracking-tight text-accent">{title}</h1>
+      ) : null}
       {children}
     </section>
   );

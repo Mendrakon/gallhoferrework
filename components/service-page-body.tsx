@@ -1,4 +1,4 @@
-import type { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { Fragment } from "react";
 import { Section } from "@/components/section";
 import { TodoNote } from "@/components/todo-note";
@@ -28,11 +28,13 @@ export function ServicePageBody({
   page,
   hero,
   heroAlt,
+  gallery,
   children,
 }: {
   page: ServicePage;
   hero?: StaticImageData;
   heroAlt?: string;
+  gallery?: StaticImageData[];
   children?: React.ReactNode;
 }) {
   return (
@@ -48,6 +50,15 @@ export function ServicePageBody({
           )
         )}
       </div>
+      {gallery && gallery.length > 0 ? (
+        <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {gallery.map((img, i) => (
+            <li key={i} className="border border-line bg-surface p-1">
+              <Image src={img} alt="" className="h-28 w-full object-cover sm:h-32" />
+            </li>
+          ))}
+        </ul>
+      ) : null}
       {page.contentPending ? <TodoNote /> : null}
       {children}
     </Section>
