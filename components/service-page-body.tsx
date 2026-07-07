@@ -4,24 +4,29 @@ import { Section } from "@/components/section";
 import { TodoNote } from "@/components/todo-note";
 import type { ServicePage } from "@/content/services";
 
-// Klickbare Links aus im Fließtext stehenden URLs (verbatim übernommen, z. B. der
-// Honeywell-Evohome-Link auf der Smart-Home-Seite).
+// Klickbare Links aus im Fließtext stehenden URLs und E-Mail-Adressen (verbatim
+// übernommen, z. B. der Honeywell-Link auf Smart Home oder die E-Mail im Impressum).
+const linkClass =
+  "font-medium text-brand underline underline-offset-2 hover:text-brand-dark [overflow-wrap:anywhere]";
+
 function renderText(text: string) {
-  return text.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
-    /^https?:\/\//.test(part) ? (
-      <a
-        key={i}
-        href={part}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-medium text-brand underline underline-offset-2 hover:text-brand-dark [overflow-wrap:anywhere]"
-      >
-        {part}
-      </a>
-    ) : (
-      <Fragment key={i}>{part}</Fragment>
-    )
-  );
+  return text.split(/(https?:\/\/[^\s]+|[^\s@]+@[^\s@]+\.[^\s@]+)/g).map((part, i) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a key={i} href={part} target="_blank" rel="noopener noreferrer" className={linkClass}>
+          {part}
+        </a>
+      );
+    }
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(part)) {
+      return (
+        <a key={i} href={`mailto:${part}`} className={linkClass}>
+          {part}
+        </a>
+      );
+    }
+    return <Fragment key={i}>{part}</Fragment>;
+  });
 }
 
 export function ServicePageBody({
