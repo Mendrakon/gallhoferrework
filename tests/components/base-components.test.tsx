@@ -35,7 +35,12 @@ describe("ServicePageBody", () => {
   it("rendert Absätze ohne TodoNote, wenn Inhalt vorhanden", () => {
     render(
       <ServicePageBody
-        page={{ slug: "x", title: "Testseite", paragraphs: ["Erster Absatz."], contentPending: false }}
+        page={{
+          slug: "x",
+          title: "Testseite",
+          blocks: [{ type: "paragraph", text: "Erster Absatz." }],
+          contentPending: false,
+        }}
       />
     );
     expect(screen.getByRole("heading", { level: 1, name: "Testseite" })).toBeInTheDocument();
@@ -44,7 +49,7 @@ describe("ServicePageBody", () => {
   });
 
   it("zeigt TodoNote bei pending", () => {
-    render(<ServicePageBody page={{ slug: "x", title: "Leer", paragraphs: [], contentPending: true }} />);
+    render(<ServicePageBody page={{ slug: "x", title: "Leer", blocks: [], contentPending: true }} />);
     expect(screen.getByRole("note")).toBeInTheDocument();
   });
 });

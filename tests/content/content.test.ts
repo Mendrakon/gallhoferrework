@@ -82,7 +82,7 @@ describe("services", () => {
 
   it("Seiten ohne übernommenen Text sind als pending markiert", () => {
     for (const page of [privatUebersicht, ...privatLeistungen, ...b2bSeiten]) {
-      if (page.paragraphs.length === 0) {
+      if (page.blocks.length === 0) {
         expect(page.contentPending).toBe(true);
       } else {
         expect(page.contentPending).toBe(false);

@@ -1,4 +1,4 @@
-import type { ServicePage } from "@/content/services";
+import { asParagraphs, type ServicePage } from "@/content/services";
 
 // Bestandstexte von der Live-Seite (Task 10 Step 1), aus .tmp-extract/ extrahiert:
 // impressum.php, agb.php, datenschutz.php (alle drei HTTP 200, Fetch-Datum siehe
@@ -38,7 +38,7 @@ export const rechtsSeiten: ServicePage[] = [
   {
     slug: "impressum",
     title: "Impressum",
-    paragraphs: [
+    blocks: asParagraphs([
       "Herr Johann Gallhofer hat 1987 die Firma von Herrn Michael Duacsek übernommen und gründete gemeinsam mit Herrn Duacsek die Duacsek GmbH, die dann nach dem Ausscheiden des Herrn Duacsek in Gallhofer GmbH umbenannt wurde. Zum damaligen Zeitpunkt existierte die Firma Michael Duacsek schon über 30 Jahre. Die Firma ist somit über 60 Jahre alt.",
       "Gallhofer Gesellschaft m.b.H.",
       "Viktorgasse 20, 1040 Wien",
@@ -56,7 +56,7 @@ export const rechtsSeiten: ServicePage[] = [
       "E-Mail: office@gallhofer-haustechnik.at",
       "Internet: www.gallhofer-haustechnik.at",
       "FB Nr. 76806a UID: ATU15599706 DG Nr. 200623312",
-    ],
+    ]),
     contentPending: false,
   },
 
@@ -93,7 +93,7 @@ export const rechtsSeiten: ServicePage[] = [
   {
     slug: "agb",
     title: "AGB",
-    paragraphs: [
+    blocks: asParagraphs([
       "1. Geltung",
       "1.1. Diese Geschäftsbedingungen gelten zwischen uns (Gallhofer GmbH) und natürlichen und juristischen Per-sonen (kurz Kunde) für das gegenständliche Rechtsge-schäft sowie gegenüber unternehmerischen Kunden auch für alle hinkünftigen Geschäfte, selbst wenn im Einzelfall, insbesondere bei künftigen Ergänzungs- oder Folge-aufträgen darauf nicht ausdrücklich Bezug genommen wurde.",
       "1.2. Es gilt gegenüber unternehmerischen Kunden jeweils die bei Vertragsabschluss aktuelle Fassung unserer AGB, abrufbar auf unserer Homepage (www.haustechnik-gallhofer.at) und wurden diese auch an den Kunden übermittelt.",
@@ -230,7 +230,7 @@ export const rechtsSeiten: ServicePage[] = [
       "19.3. Erfüllungsort ist der Sitz des Unternehmens (Wien).",
       "19.4. Gerichtsstand für alle sich aus dem Vertragsver-hältnis oder künftigen Verträgen zwischen uns und dem unternehmerischen Kunden ergebenden Streitigkeiten ist das für unseren Sitz örtlich zuständige Gericht. Gerichts-stand für Verbraucher, sofern dieser seinen Wohnsitz im Inland hat, ist das Gericht, in dessen Sprengel der Ver-braucher seinen gewöhnlichen Aufenthalt oder Ort der Beschäftigung hat.",
       "19.5. Änderungen seines Namens, der Firma, seiner Anschrift, seiner Rechtsform oder andere relevante Infor-mationen hat der Kunde uns umgehend schriftlich bekannt zu geben.",
-    ],
+    ]),
     contentPending: false,
   },
 
@@ -260,7 +260,7 @@ export const rechtsSeiten: ServicePage[] = [
   {
     slug: "datenschutz",
     title: "Datenschutz",
-    paragraphs: [
+    blocks: asParagraphs([
       "Diese Erklärung bezieht sich auf Daten, die dadurch bekannt werden, weil der Kunde diese Website nutzt. Im Folgenden wird darüber informiert, um was für Daten es sich dabei handelt und was mit ihnen passiert.",
       "Sofern sich auf der Website der Fa. Gallhofer GmbH Links zu anderen Internetseiten befinden, gilt diese Erklärung nicht für die Datenerhebung- und Verwendung auf den gelinkten Seiten.",
       "1. Personenbezogene Daten – Erhebung und Verwendung",
@@ -280,7 +280,7 @@ export const rechtsSeiten: ServicePage[] = [
       "Sie erreichen uns unter folgenden Kontaktdaten:",
       "Gallhofer GmbH",
       "1040 Wien, Viktorgasse 20 – Hauptsitz 7212 Forchtenstein, Talgasse 23 – Zweigstelle Tel. +4317491456 Email: office@gallhofer-haustechnik.at",
-    ],
+    ]),
     contentPending: false,
   },
 ];

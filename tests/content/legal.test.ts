@@ -7,7 +7,7 @@ describe("Rechtsseiten", () => {
 
   it("Seiten ohne übernommenen Bestandstext sind pending", () => {
     for (const page of rechtsSeiten) {
-      if (page.paragraphs.length === 0) {
+      if (page.blocks.length === 0) {
         expect(page.contentPending).toBe(true);
       } else {
         expect(page.contentPending).toBe(false);
