@@ -3,12 +3,13 @@ import { TodoNote } from "@/components/todo-note";
 import { locations } from "@/content/locations";
 import { gebrechendienstLeistungen } from "@/content/services";
 import { buildMetadata } from "@/lib/meta";
+import hero from "@/public/leistungen/gebrechendienst.jpg";
 
 export const metadata = buildMetadata("/gebrechendienst");
 
 export default function GebrechendienstPage() {
   return (
-    <Section title="Gebrechendienst">
+    <Section title="Gebrechendienst" hero={hero} heroAlt="Gebrechendienst – Gallhofer Haustechnik">
       <dl className="space-y-6">
         {gebrechendienstLeistungen.map((s) => (
           <div key={s.title}>

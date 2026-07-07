@@ -5,14 +5,15 @@ import HeizungsrechnerPage from "@/app/heizungsrechner/page";
 import { privatLeistungen } from "@/content/services";
 
 describe("Privat-Übersicht", () => {
-  it("listet alle 5 Leistungen als Links", () => {
-    render(<PrivatkundenPage />);
+  it("listet alle 5 Leistungen als verlinkte Bildkacheln", () => {
+    const { container } = render(<PrivatkundenPage />);
     for (const p of privatLeistungen) {
       expect(screen.getByRole("link", { name: p.title })).toHaveAttribute(
         "href",
         `/privatkunden/${p.slug}`
       );
     }
+    expect(container.querySelectorAll("img")).toHaveLength(5);
   });
 });
 
@@ -33,9 +34,12 @@ describe("Heizungsrechner", () => {
 });
 
 describe("Leistungs-Detailseite", () => {
-  it("rendert bekannte Slugs mit Titel als h1", async () => {
-    render(await PrivatLeistungPage({ params: Promise.resolve({ slug: "smart-home" }) }));
+  it("rendert bekannte Slugs mit Titel als h1 und Hero-Bild", async () => {
+    const { container } = render(
+      await PrivatLeistungPage({ params: Promise.resolve({ slug: "smart-home" }) })
+    );
     expect(screen.getByRole("heading", { level: 1, name: "Smart Home" })).toBeInTheDocument();
+    expect(container.querySelectorAll("img").length).toBeGreaterThanOrEqual(1);
   });
 
   it("wirft notFound für unbekannte Slugs", async () => {

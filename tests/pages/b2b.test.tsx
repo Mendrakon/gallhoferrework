@@ -26,11 +26,12 @@ describe("Gebrechendienst", () => {
 });
 
 describe("B2B-Übersicht", () => {
-  it("verlinkt die weiteren B2B-Seiten", () => {
-    render(<UebersichtPage />);
-    for (const label of ["Heizzentralen", "Fernüberwachung", "Gebrechendienst", "Wartung", "Galerie"]) {
+  it("zeigt die 4 Original-Bildkacheln als Links", () => {
+    const { container } = render(<UebersichtPage />);
+    for (const label of ["Heizzentralen", "Fernüberwachung", "Gebrechendienst", "Wartung"]) {
       expect(screen.getByRole("link", { name: label })).toBeInTheDocument();
     }
+    expect(container.querySelectorAll("img")).toHaveLength(4);
   });
 });
 

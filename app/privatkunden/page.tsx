@@ -1,25 +1,39 @@
-import Link from "next/link";
-import { ServicePageBody } from "@/components/service-page-body";
-import { privatLeistungen, privatUebersicht } from "@/content/services";
+import type { StaticImageData } from "next/image";
+import { Section } from "@/components/section";
+import { Tile } from "@/components/tile";
+import { privatLeistungen } from "@/content/services";
 import { buildMetadata } from "@/lib/meta";
+import tileReparaturen from "@/public/leistungen/tile-reparaturen.jpg";
+import tileKessel from "@/public/leistungen/tile-kessel-thermentausch.jpg";
+import tileSmart from "@/public/leistungen/tile-smart-home.jpg";
+import tileUmwelt from "@/public/leistungen/tile-umwelt-energiemanagement.jpg";
+import tileNeubau from "@/public/leistungen/tile-renovierung-neubau.jpg";
 
 export const metadata = buildMetadata("/privatkunden");
 
+const tileBySlug: Record<string, StaticImageData> = {
+  reparaturen: tileReparaturen,
+  "kessel-thermentausch": tileKessel,
+  "smart-home": tileSmart,
+  "umwelt-energiemanagement": tileUmwelt,
+  "renovierung-neubau": tileNeubau,
+};
+
 export default function PrivatkundenPage() {
   return (
-    <ServicePageBody page={privatUebersicht}>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+    <Section title="Privatkunden">
+      <div className="grid gap-6 sm:grid-cols-2">
         {privatLeistungen.map((p) => (
-          <li key={p.slug}>
-            <Link
-              href={`/privatkunden/${p.slug}`}
-              className="block border border-line bg-surface px-4 py-3 text-brand hover:border-brand"
-            >
-              {p.title}
-            </Link>
-          </li>
+          <Tile
+            key={p.slug}
+            href={`/privatkunden/${p.slug}`}
+            title={p.title}
+            image={tileBySlug[p.slug]}
+            alt=""
+            labelPosition="below"
+          />
         ))}
-      </ul>
-    </ServicePageBody>
+      </div>
+    </Section>
   );
 }
