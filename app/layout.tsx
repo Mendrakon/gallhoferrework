@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { PT_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { JsonLd } from "@/components/json-ld";
+import { locations } from "@/content/locations";
+import { plumberJsonLd } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -28,6 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        {locations.map((loc) => (
+          <JsonLd key={loc.name} data={plumberJsonLd(loc)} />
+        ))}
       </body>
     </html>
   );
