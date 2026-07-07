@@ -17,9 +17,6 @@ describe("Startseite", () => {
     expect(screen.getByRole("link", { name: "Heizungsrechner" })).toHaveAttribute("href", "/heizungsrechner");
   });
 
-  it("zeigt den Standort-Block", () => {
-    render(<Home />);
-    expect(screen.getByText(/Viktorgasse 20/)).toBeInTheDocument();
-    expect(screen.getByText(/Schloßbergstraße 20/)).toBeInTheDocument();
-  });
+  // Der Standort-Block steht global im Footer (SiteFooter), nicht mehr zusätzlich im
+  // Splash-Body — sonst erschien er auf der Startseite doppelt. Footer-Test: base-components.
 });
