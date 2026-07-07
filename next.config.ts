@@ -5,6 +5,11 @@ import type { NextConfig } from "next";
 export const phpRedirects: { source: string; destination: string }[] = [
   { source: "/index.php", destination: "/" },
   { source: "/privatkunden.php", destination: "/privatkunden" },
+  { source: "/privatkunden-reparaturen.php", destination: "/privatkunden/reparaturen" },
+  { source: "/privatkunden-kessel-thermentausch.php", destination: "/privatkunden/kessel-thermentausch" },
+  { source: "/privatkunden-smart-home.php", destination: "/privatkunden/smart-home" },
+  { source: "/privatkunden-umwelt-energiemanagement.php", destination: "/privatkunden/umwelt-energiemanagement" },
+  { source: "/renovierung-und-neubau.php", destination: "/privatkunden/renovierung-neubau" },
   { source: "/hausverwaltung-industrie.php", destination: "/hausverwaltung-industrie" },
   { source: "/heizzentralen.php", destination: "/heizzentralen" },
   { source: "/fernueberwachung.php", destination: "/fernueberwachung" },

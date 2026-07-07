@@ -15,6 +15,7 @@ Ohne diese Angaben bleiben die betroffenen Stellen als „⚠️ Inhalt folgt" m
 - [ ] **AGB — verwaiste Domain:** Punkt 1.2 verweist auf die Homepage „www.haustechnik-gallhofer.at" — diese Domain ist nicht erreichbar (NXDOMAIN, geprüft). Die tatsächliche Domain lautet `gallhofer-haustechnik.at` (umgekehrte Wortstellung). Bitte die korrekte Domain bestätigen, damit der AGB-Verweis korrigiert werden kann.
 - [ ] **Impressum-Zusatzdaten:** Das Impressum nennt Bürozeiten (Mo–Do 8–12 & 13–16 Uhr, Fr 8–12 Uhr) und Mobilnummern einzelner Mitarbeiter (Geschäftsführer, Inhaber, Sekretariat, Buchhaltung), die bislang nicht in den strukturierten Standort-Daten/JSON-LD stehen. Bitte bestätigen, ob und wie diese auf der neuen Seite bzw. als Kontaktdaten erscheinen sollen.
 - [ ] **Freigabe der Rechtstexte:** Bestätigen, dass der bestehende Impressum-/AGB-/Datenschutz-Text unverändert übernommen werden darf — oder aktualisierte Fassung liefern. Rechtstexte wurden bewusst nicht neu formuliert oder korrigiert.
+- [ ] **Datenschutz — Über-Deklaration:** Der übernommene Datenschutztext beschreibt ein Kontaktformular, einen Newsletter und Cookies, die die neue (statische) Seite nicht verwendet. Bewusst verbatim übernommen (Rechtstexte werden nicht selbst umformuliert) — bitte vom Anwalt/Betrieb auf den tatsächlichen Umfang der neuen Seite kürzen lassen.
 
 ## Navigation / Wording
 

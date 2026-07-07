@@ -6,6 +6,11 @@ describe("301-Redirects", () => {
     const bySource = Object.fromEntries(phpRedirects.map((r) => [r.source, r.destination]));
     expect(bySource["/index.php"]).toBe("/");
     expect(bySource["/privatkunden.php"]).toBe("/privatkunden");
+    expect(bySource["/privatkunden-reparaturen.php"]).toBe("/privatkunden/reparaturen");
+    expect(bySource["/privatkunden-kessel-thermentausch.php"]).toBe("/privatkunden/kessel-thermentausch");
+    expect(bySource["/privatkunden-smart-home.php"]).toBe("/privatkunden/smart-home");
+    expect(bySource["/privatkunden-umwelt-energiemanagement.php"]).toBe("/privatkunden/umwelt-energiemanagement");
+    expect(bySource["/renovierung-und-neubau.php"]).toBe("/privatkunden/renovierung-neubau");
     expect(bySource["/hausverwaltung-industrie.php"]).toBe("/hausverwaltung-industrie");
     expect(bySource["/heizzentralen.php"]).toBe("/heizzentralen");
     expect(bySource["/fernueberwachung.php"]).toBe("/fernueberwachung");
@@ -16,7 +21,7 @@ describe("301-Redirects", () => {
     expect(bySource["/agb.php"]).toBe("/agb");
     expect(bySource["/datenschutz.php"]).toBe("/datenschutz");
     expect(bySource["/heizungsrechner.php"]).toBe("/heizungsrechner");
-    expect(phpRedirects).toHaveLength(12);
+    expect(phpRedirects).toHaveLength(17);
   });
 
   it("jede Source ist .php, jede Destination eine echte Route", () => {
