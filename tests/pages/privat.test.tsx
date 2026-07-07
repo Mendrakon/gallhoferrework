@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import PrivatkundenPage from "@/app/privatkunden/page";
-import { generateStaticParams } from "@/app/privatkunden/[slug]/page";
+import PrivatLeistungPage, { generateMetadata, generateStaticParams } from "@/app/privatkunden/[slug]/page";
 import HeizungsrechnerPage from "@/app/heizungsrechner/page";
 import { privatLeistungen } from "@/content/services";
 
@@ -29,5 +29,21 @@ describe("Heizungsrechner", () => {
     render(<HeizungsrechnerPage />);
     expect(screen.getByRole("heading", { level: 1, name: "Heizungsrechner" })).toBeInTheDocument();
     expect(screen.getByRole("note")).toBeInTheDocument();
+  });
+});
+
+describe("Leistungs-Detailseite", () => {
+  it("rendert bekannte Slugs mit Titel als h1", async () => {
+    render(await PrivatLeistungPage({ params: Promise.resolve({ slug: "smart-home" }) }));
+    expect(screen.getByRole("heading", { level: 1, name: "Smart Home" })).toBeInTheDocument();
+  });
+
+  it("wirft notFound für unbekannte Slugs", async () => {
+    await expect(PrivatLeistungPage({ params: Promise.resolve({ slug: "gibts-nicht" }) })).rejects.toThrow();
+  });
+
+  it("generateMetadata liefert den Seitentitel", async () => {
+    const meta = await generateMetadata({ params: Promise.resolve({ slug: "smart-home" }) });
+    expect(meta.title).toBe("Smart Home");
   });
 });
