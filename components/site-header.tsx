@@ -15,14 +15,14 @@ export function SiteHeader() {
 
   return (
     <header className="border-b border-line bg-bg">
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 sm:justify-center">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 md:justify-center">
         <Link href="/" aria-label="Gallhofer Haustechnik – zur Startseite" onClick={() => setOpen(false)}>
-          <Image src={logoDesktop} alt="Gallhofer Haustechnik" priority className="hidden h-12 w-auto sm:block" />
-          <Image src={logoMobile} alt="Gallhofer Haustechnik" priority className="h-10 w-auto sm:hidden" />
+          <Image src={logoDesktop} alt="Gallhofer Haustechnik" priority className="hidden h-12 w-auto md:block" />
+          <Image src={logoMobile} alt="Gallhofer Haustechnik" priority className="h-10 w-auto md:hidden" />
         </Link>
         <button
           type="button"
-          className="rounded border border-line p-2 text-text sm:hidden"
+          className="rounded border border-line p-2 text-text md:hidden"
           aria-label="Menü"
           aria-expanded={open}
           aria-controls="site-nav"
@@ -56,9 +56,9 @@ export function SiteHeader() {
       <nav
         id="site-nav"
         aria-label="Hauptnavigation"
-        className={`${open ? "block" : "hidden"} border-t border-line sm:block`}
+        className={`${open ? "block" : "hidden"} border-t border-line md:block`}
       >
-        <ul className="mx-auto flex w-full max-w-5xl flex-col px-4 py-2 sm:flex-row sm:justify-center sm:gap-6">
+        <ul className="mx-auto flex w-full max-w-5xl flex-col px-4 py-2 md:flex-row md:justify-center md:gap-6">
           {items.map((item) => {
             const active = pathname === item.href;
             return (

@@ -1,13 +1,11 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import GebrechendienstPage from "@/app/gebrechendienst/page";
 import UebersichtPage from "@/app/hausverwaltung-industrie/page";
 import GaleriePage from "@/app/galerie/page";
 import HeizzentralenPage from "@/app/heizzentralen/page";
 import FernueberwachungPage from "@/app/fernueberwachung/page";
 import WartungPage from "@/app/wartung/page";
-import { galerieBilder } from "@/content/galerie";
+import { galerieImages } from "@/content/galerie";
 import { gebrechendienstLeistungen } from "@/content/services";
 
 describe("Gebrechendienst", () => {
@@ -35,11 +33,17 @@ describe("B2B-Übersicht", () => {
   });
 });
 
-describe("Galerie-Daten", () => {
-  it("jeder Eintrag in galerieBilder existiert als Datei", () => {
-    for (const file of galerieBilder) {
-      expect(existsSync(path.join(process.cwd(), "public", "galerie", file))).toBe(true);
-    }
+describe("Galerie", () => {
+  it("führt die 10 Original-Galeriebilder", () => {
+    expect(galerieImages).toHaveLength(10);
+  });
+
+  it("öffnet ein Bild per Klick in der Lightbox (Dialog)", () => {
+    const { container } = render(<GaleriePage />);
+    const thumbs = container.querySelectorAll("ul li button");
+    expect(thumbs).toHaveLength(10);
+    fireEvent.click(thumbs[0]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 });
 
