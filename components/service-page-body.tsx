@@ -45,7 +45,7 @@ export function ServicePageBody({
 }) {
   return (
     <Section title={page.title} hero={hero} heroAlt={heroAlt}>
-      <div className="max-w-3xl space-y-4 leading-relaxed">
+      <div className="space-y-4 leading-relaxed">
         {page.blocks.map((block, i) =>
           block.type === "heading" ? (
             <h2 key={i} className="pt-4 text-xl font-semibold text-brand">
