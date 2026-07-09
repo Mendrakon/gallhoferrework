@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import PrivatkundenPage from "@/app/privatkunden/page";
 import PrivatLeistungPage, { generateMetadata, generateStaticParams } from "@/app/privatkunden/[slug]/page";
 import HeizungsrechnerPage from "@/app/heizungsrechner/page";
@@ -42,6 +42,19 @@ describe("Leistungs-Detailseite", () => {
     expect(container.querySelectorAll("img").length).toBeGreaterThanOrEqual(1);
     // Smart-Home-Detailseite zeigt die 5 Original-Galeriebilder unter dem Text.
     expect(container.querySelectorAll("ul li img")).toHaveLength(5);
+  });
+
+  it("Galerie öffnet per Klick die Großansicht (Dialog) und schließt wieder", async () => {
+    const { container } = render(
+      await PrivatLeistungPage({ params: Promise.resolve({ slug: "smart-home" }) })
+    );
+    const thumbs = container.querySelectorAll("ul li button");
+    expect(thumbs).toHaveLength(5);
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    fireEvent.click(thumbs[0]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Schließen" }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("wirft notFound für unbekannte Slugs", async () => {

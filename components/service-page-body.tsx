@@ -1,5 +1,6 @@
-import Image, { type StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
 import { Fragment } from "react";
+import { Gallery } from "@/components/gallery";
 import { Section } from "@/components/section";
 import { TodoNote } from "@/components/todo-note";
 import type { ServicePage } from "@/content/services";
@@ -55,15 +56,7 @@ export function ServicePageBody({
           )
         )}
       </div>
-      {gallery && gallery.length > 0 ? (
-        <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {gallery.map((img, i) => (
-            <li key={i} className="border border-line bg-surface p-1">
-              <Image src={img} alt="" className="h-28 w-full object-cover sm:h-32" />
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      {gallery && gallery.length > 0 ? <Gallery images={gallery} altPrefix={page.title} /> : null}
       {page.contentPending ? <TodoNote /> : null}
       {children}
     </Section>
