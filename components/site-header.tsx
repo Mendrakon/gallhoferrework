@@ -17,7 +17,7 @@ export function SiteHeader() {
     <header className="border-b border-line bg-bg">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 md:justify-center">
         <Link href="/" aria-label="Gallhofer Haustechnik – zur Startseite" onClick={() => setOpen(false)}>
-          <Image src={logoDesktop} alt="Gallhofer Haustechnik" priority className="hidden h-12 w-auto md:block" />
+          <Image src={logoDesktop} alt="Gallhofer Haustechnik" priority className="hidden h-16 w-auto md:block lg:h-[72px]" />
           <Image src={logoMobile} alt="Gallhofer Haustechnik" priority className="h-10 w-auto md:hidden" />
         </Link>
         <button
