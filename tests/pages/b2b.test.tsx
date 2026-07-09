@@ -1,0 +1,75 @@
+import { fireEvent, render, screen } from "@testing-library/react";
+import GebrechendienstPage from "@/app/gebrechendienst/page";
+import UebersichtPage from "@/app/hausverwaltung-industrie/page";
+import GaleriePage from "@/app/galerie/page";
+import HeizzentralenPage from "@/app/heizzentralen/page";
+import FernueberwachungPage from "@/app/fernueberwachung/page";
+import WartungPage from "@/app/wartung/page";
+import { galerieImages } from "@/content/galerie";
+import { gebrechendienstLeistungen } from "@/content/services";
+
+describe("Gebrechendienst", () => {
+  it("führt alle 5 belegten Leistungen mit Text auf", () => {
+    render(<GebrechendienstPage />);
+    for (const s of gebrechendienstLeistungen) {
+      expect(screen.getByText(s.title)).toBeInTheDocument();
+    }
+    expect(screen.getByRole("heading", { level: 1, name: "Gebrechendienst" })).toBeInTheDocument();
+  });
+
+  it("weist auf die ungeklärte Notdienst-Nummer hin (TodoNote)", () => {
+    render(<GebrechendienstPage />);
+    expect(screen.getByRole("note")).toHaveTextContent(/Notdienst/);
+  });
+});
+
+describe("B2B-Übersicht", () => {
+  it("zeigt die 4 Original-Bildkacheln als Links", () => {
+    const { container } = render(<UebersichtPage />);
+    for (const label of ["Heizzentralen", "Fernüberwachung", "Gebrechendienst", "Wartung"]) {
+      expect(screen.getByRole("link", { name: label })).toBeInTheDocument();
+    }
+    expect(container.querySelectorAll("img")).toHaveLength(4);
+  });
+});
+
+describe("Galerie", () => {
+  it("führt die 10 Original-Galeriebilder", () => {
+    expect(galerieImages).toHaveLength(10);
+  });
+
+  it("öffnet ein Bild per Klick in der Lightbox (Dialog)", () => {
+    const { container } = render(<GaleriePage />);
+    const thumbs = container.querySelectorAll("ul li button");
+    expect(thumbs).toHaveLength(10);
+    fireEvent.click(thumbs[0]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+});
+
+describe("B2B-Leaf-Seiten rendern mit h1", () => {
+  it("Heizzentralen hat eine h1", () => {
+    render(<HeizzentralenPage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Heizzentralen" })).toBeInTheDocument();
+  });
+  it("Fernüberwachung hat eine h1", () => {
+    render(<FernueberwachungPage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Fernüberwachung" })).toBeInTheDocument();
+  });
+  it("Wartung hat eine h1", () => {
+    render(<WartungPage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Wartung" })).toBeInTheDocument();
+  });
+  it("Galerie hat eine h1", () => {
+    render(<GaleriePage />);
+    expect(screen.getByRole("heading", { level: 1, name: "Galerie" })).toBeInTheDocument();
+  });
+});
+
+describe("B2B-Übersicht verlinkt nicht auf sich selbst", () => {
+  it("zeigt weder Willkommen noch den Selbst-Link als Link", () => {
+    render(<UebersichtPage />);
+    expect(screen.queryByRole("link", { name: "Willkommen" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Hausverwaltung & Industrie" })).not.toBeInTheDocument();
+  });
+});
